@@ -8,7 +8,10 @@ public class GameManager : MonoBehaviour {
 	public static GameObject instance;
 
 	public GameObject player;
-	public Grid grid;
+	public GameObject env;
+	public List<GameObject> chunks;
+
+	public Chunk chunkPrefab;
 
 	void Awake () {
 		// Don't destroy stuff
@@ -22,6 +25,14 @@ public class GameManager : MonoBehaviour {
 		// If scene is ingame, get player
 		if (SceneManager.GetActiveScene ().buildIndex == 1) {
 			player = GameObject.FindGameObjectWithTag ("Player");
+			env = GameObject.FindGameObjectWithTag ("Env");
+			chunks = new List<GameObject> ();
+			int start_platform = Random.Range (0, 5);
+			player.transform.position = new Vector3 (1, 4 * start_platform + 2);
+			// Generate first chunk
+			Chunk chunk = Instantiate(chunkPrefab);
+			chunk.transform.parent = env.transform;
+			chunk.generate (new List<int>(){start_platform});
 		}
 	}
 	
