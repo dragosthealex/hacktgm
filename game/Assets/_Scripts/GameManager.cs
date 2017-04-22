@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
 	public static GameObject instance;
 
 	public GameObject player;
+	public Grid grid;
 
 	void Awake () {
 		// Don't destroy stuff
