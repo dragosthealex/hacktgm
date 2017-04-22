@@ -31,8 +31,9 @@ public class Cell : MonoBehaviour {
 			break;
 		case("platform"):
 			// Draw platform
-			GameObject platform = Instantiate (platformPrefab, Vector3.zero, Quaternion.identity);
+			GameObject platform = Instantiate (platformPrefab);
 			platform.transform.parent = gameObject.transform;
+			platform.transform.localPosition = Vector3.zero;
 			break;
 		default:
 			break;
