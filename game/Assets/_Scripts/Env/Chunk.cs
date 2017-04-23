@@ -80,8 +80,8 @@ public class Chunk : MonoBehaviour {
 	}
 
 	// Generates chunk with starts
-	public List<int> generate(List<int> starts) {
-		double diflvl = 0.3;
+	public List<int> generate(List<int> starts, double diflvl) {
+		//double diflvl = 0.3;
 		int nrexits=0;
 
 		List<List<bool>> cellset = new List<List<bool>>();

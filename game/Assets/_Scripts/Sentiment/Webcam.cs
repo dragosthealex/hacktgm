@@ -33,7 +33,7 @@ public class Webcam : MonoBehaviour {
 
             StartCoroutine(GetEmotion()); //call to api
 
-            yield return new WaitForSeconds(4f); //every 3 seconds
+            yield return new WaitForSeconds(6f); //every 3 seconds
         }
     }
 

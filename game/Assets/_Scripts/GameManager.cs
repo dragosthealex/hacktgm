@@ -55,14 +55,14 @@ public class GameManager : MonoBehaviour {
 			// Generate first chunk
 			Chunk chunk = Instantiate(chunkPrefab);
 			chunk.transform.parent = env.transform;
-			ends = chunk.generate (new List<int>(){start_platform});
+			ends = chunk.generate (new List<int>(){start_platform}, 0.1f);
 			chunks.Add (chunk.gameObject);
 			// Generate rest of them up to 5
-			for (int i = 1; i < 5; i++) {
+			for (int i = 1; i < 3; i++) {
 				chunk = Instantiate (chunkPrefab);
 				chunk.transform.parent = env.transform;
 				chunk.transform.localPosition = new Vector3(Chunk.WIDTH * 2 * i, 0);
-				ends = chunk.generate (ends);
+				ends = chunk.generate (ends, 0.1f);
 				chunks.Add (chunk.gameObject);
 			}
 			// Generate two bg chunks
@@ -104,7 +104,39 @@ public class GameManager : MonoBehaviour {
 			GameObject last = chunks [chunks.Count - 1];
 			chunk.transform.localPosition = new Vector3 (last.transform.position.x + Chunk.WIDTH * 2, 0);
 			// TODO: Use nice algorithm with blocks
-			ends = chunk.generate (ends);
+
+			double difficulty=0.0f;
+			difficulty = neutral - happy;
+//Debug.Log(difficulty);
+//Debug.Log("\n");
+//			Debug.Log(angry + " " + neutral + " " + happy );
+
+			if (angry > 0.2)
+				difficulty = angry;
+			else if (happy > 0.2)
+					difficulty = 0.3-happy;
+			else
+				difficulty = (neutral - 0.95) * 8;
+
+/*
+			if (angry > 0.1 ){
+				if (happy > 0.1)
+					difficulty = (angry * neutral) / happy;
+				else 
+					difficulty = (neutral-0.9)*4;
+			}else
+				difficulty = (neutral-0.5) - happy;
+*/
+			if (difficulty < -0.1)
+				difficulty = -0.1; 
+
+			if (difficulty > 0.33)
+				difficulty = 0.33;
+
+			Debug.Log(difficulty);	
+			Debug.Log("\n");		
+
+			ends = chunk.generate (ends, difficulty);
 			chunks.Add (chunk.gameObject);
 		}
 		// Do same stuff with bg
