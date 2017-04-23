@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+using System;
 
 public class ShowPanels : MonoBehaviour {
 
@@ -8,6 +10,7 @@ public class ShowPanels : MonoBehaviour {
 	public GameObject menuPanel;							//Store a reference to the Game Object MenuPanel 
 	public GameObject pausePanel;							//Store a reference to the Game Object PausePanel 
 	public GameObject deathPanel;
+	public Text scoreText;
 
 
 	//Call this function to activate and display the Options panel during the main menu
@@ -17,8 +20,9 @@ public class ShowPanels : MonoBehaviour {
 		optionsTint.SetActive(true);
 	}
 
-	public void showDeathPanel()
+	public void showDeathPanel(float score)
 	{
+		scoreText.text = "Score: " + Math.Floor(score) + "m";
 		deathPanel.SetActive (true);
 	}
 

@@ -18,7 +18,8 @@ public class Restarter : MonoBehaviour
 	{
 		float len = UI.instance.musicScript.playDeath ();
 		GameManager.instance.isDead = true;
-		UI.instance.panelsScript.showDeathPanel ();
+		float score = GameManager.instance.player.transform.position.x / 2;
+		UI.instance.panelsScript.showDeathPanel (score);
 		Camera.main.GetComponent<Camera2DFollow> ().enabled = false;
 		Destroy (GameManager.instance.player);
 		yield return new WaitForSeconds(len + 0.2f);
