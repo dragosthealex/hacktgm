@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Cell : MonoBehaviour {
 
-	public static List<string> types;
+	public static List<string> types = new List<string>(){"platform", 
+		                                                  "empty",
+														  "spikes",
+	                                                      "fallPlatform"};
 
 	public string type;
 	public GameObject content;
