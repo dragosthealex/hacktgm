@@ -6,16 +6,16 @@ using UnityEngine;
 public class Cell : MonoBehaviour {
 
 	public static List<string> types = new List<string>(){"platform", 
-		                                                  "empty",
-														  "spikes",
-	                                                      "fallPlatform"};
+		"empty",
+		"spikes",
+		"fallPlatform"};
 
 	public string type;
 	public GameObject content;
 
 	public GameObject platformPrefab;
 	public GameObject spikesPlatform;
-
+	public GameObject fallPlatform;
 	public void Awake() {
 		type = "empty";
 		drawType ();
@@ -45,6 +45,13 @@ public class Cell : MonoBehaviour {
 		case("spikes"):
 			// Draw platform
 			platform = Instantiate (spikesPlatform);
+			platform.transform.parent = gameObject.transform;
+			platform.transform.localPosition = Vector3.zero;
+			content = platform;
+			break;
+		case("fallPlatform"):
+			// Draw platform
+			platform = Instantiate (fallPlatform);
 			platform.transform.parent = gameObject.transform;
 			platform.transform.localPosition = Vector3.zero;
 			content = platform;

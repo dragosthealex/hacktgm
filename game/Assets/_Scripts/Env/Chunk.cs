@@ -47,10 +47,10 @@ public class Chunk : MonoBehaviour {
 	public static int WIDTH = 32;
 	public static List<Block> blocktypes = (new List<Block>() 
 				//new Block(min)
-				{ new Block(0, WIDTH-3, 0, HEIGHT-1, 3, 1, 0, 0, 2, 0, 0.1, new List<string>() {"platform", "empty", "platform"}),
+				{ new Block(0, WIDTH-3, 0, HEIGHT-1, 3, 1, 0, 0, 2, 0, 0.1,  new List<string>() {"platform", "empty", "platform"}),
 				  new Block(0, WIDTH-4, 0, HEIGHT-1, 4, 1, 0, 0, 3, 0, 0.15, new List<string>() {"platform", "empty", "empty", "platform"}),
 				  new Block(0, WIDTH-5, 0, HEIGHT-1, 5, 1, 0, 0, 4, 0, 0.20, new List<string>() {"platform", "empty", "empty", "empty", "platform"}),
-				  new Block(0, WIDTH-2, 0, HEIGHT-1, 2, 1, 0, 0, 1, 0, 0, new List<string>() {"platform", "platform"}),
+				  new Block(0, WIDTH-2, 0, HEIGHT-1, 2, 1, 0, 0, 1, 0, 0,    new List<string>() {"platform", "platform"}),
 				  new Block(0, WIDTH-2, 0, HEIGHT-2, 2, 2, 0, 0, 1, 1, 0.02, new List<string>() {"platform", "empty", "empty", "platform"}),
 				  new Block(0, WIDTH-3, 0, HEIGHT-2, 3, 2, 0, 1, 2, 0, 0.12, new List<string>() {"empty", "empty", "platform", "platform", "empty", "empty"}),
 				  new Block(0, WIDTH-7, 0, HEIGHT-2, 7, 2, 0, 1, 6, 0, 0.32, new List<string>() {"empty", "empty", "platform", "empty", "empty", "platform", "platform", 
@@ -58,7 +58,17 @@ public class Chunk : MonoBehaviour {
 				  new Block(0, WIDTH-3, 0, HEIGHT-4, 3, 4, 0, 0, 3, 3, 0.22, new List<string>() {"platform", "empty", "empty",
 				  																				"empty", "platform", "empty", 
 				  																				"platform","empty", "empty",
-				  																				"empty", "platform", "platform" })
+				  																				"empty", "platform", "platform" }),
+				  new Block(0, WIDTH-5, 0, HEIGHT-1, 5, 1, 0, 0, 4, 0, 0.15, new List<string>() {"platform","fallPlatform", "fallPlatform", "fallPlatform","platform"}),
+				  new Block(0, WIDTH-7, 0, HEIGHT-2, 7, 2, 0, 1, 6, 0, 0.30, new List<string>() {"empty", "empty", "platform", "empty", "empty", "fallPlatform", "platform", 
+																								"platform", "spikes", "fallPlatform", "spikes", "spikes", "spikes", "empty"}),
+				  new Block(0, WIDTH-7, 0, HEIGHT-2, 7, 2, 0, 1, 6, 0, 0.35, new List<string>() {"platform", "fallPlatform", "spikes", "fallPlatform", "spikes", "fallPlatform", "platform", 
+																								"empty", "empty", "fallPlatform", "empty", "fallPlatform", "empty", "empty"}),
+				  new Block(0, WIDTH-3, 0, HEIGHT-1, 3, 1, 0, 0, 2, 0, 0.1,  new List<string>() {"platform", "spikes", "platform"}),
+				  new Block(0, WIDTH-4, 0, HEIGHT-4, 4, 4, 0, 0, 3, 3, 0.17, new List<string>() {"platform", "empty", "empty","empty",
+																							     "empty", "fallPlatform", "empty","empty", 
+																							     "empty","empty", "fallPlatform","empty",
+																							     "empty","empty", "empty" ,"platform"})
 				});
 
 	public Cell cellPrefab;
@@ -70,7 +80,7 @@ public class Chunk : MonoBehaviour {
 	}
 
 	// Generates chunk with starts
-	public void generate(List<int> starts) {
+	public List<int> generate(List<int> starts) {
 		double diflvl = 0.3;
 		int nrexits=0;
 
@@ -151,5 +161,7 @@ public class Chunk : MonoBehaviour {
 			}
 		}
 		*/
+
+		return ends;
 	}
 }
