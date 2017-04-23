@@ -58,7 +58,10 @@ public class Chunk : MonoBehaviour {
 				  new Block(0, WIDTH-3, 0, HEIGHT-4, 3, 4, 0, 0, 3, 3, 0.22, new List<string>() {"platform", "empty", "empty",
 				  																				"empty", "platform", "empty", 
 				  																				"platform","empty", "empty",
-				  																				"empty", "platform", "platform" })
+				  																				"empty", "platform", "platform" }),
+				  new Block(0, WIDTH-4, 0, HEIGHT-1, 4, 1, 0, 0, 4, 0, 0.15, new List<string>() {"platform","fallPlatform", "fallPlatform", "fallPlatform"}),
+				  new Block(0, WIDTH-7, 0, HEIGHT-2, 7, 2, 0, 1, 6, 0, 0.30, new List<string>() {"empty", "empty", "platform", "empty", "empty", "fallPlatform", "platform", 
+																								"platform", "spikes", "fallPlatform", "spikes", "spikes", "spikes", "empty"}),
 				});
 
 	public Cell cellPrefab;

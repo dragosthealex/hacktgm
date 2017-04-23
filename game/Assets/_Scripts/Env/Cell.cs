@@ -15,7 +15,7 @@ public class Cell : MonoBehaviour {
 
 	public GameObject platformPrefab;
 	public GameObject spikesPlatform;
-
+	public GameObject fallPlatform;
 	public void Awake() {
 		type = "empty";
 		drawType ();
@@ -45,6 +45,13 @@ public class Cell : MonoBehaviour {
 		case("spikes"):
 			// Draw platform
 			platform = Instantiate (spikesPlatform);
+			platform.transform.parent = gameObject.transform;
+			platform.transform.localPosition = Vector3.zero;
+			content = platform;
+			break;
+		case("fallPlatform"):
+			// Draw platform
+			platform = Instantiate (fallPlatform);
 			platform.transform.parent = gameObject.transform;
 			platform.transform.localPosition = Vector3.zero;
 			content = platform;
