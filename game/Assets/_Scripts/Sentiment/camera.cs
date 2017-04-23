@@ -33,7 +33,7 @@ public class camera : MonoBehaviour {
 
             StartCoroutine(GetEmotion()); //call to api
 
-            yield return new WaitForSeconds(3f); //every 3 seconds
+            yield return new WaitForSeconds(4f); //every 3 seconds
         }
     }
 
@@ -63,8 +63,18 @@ public class camera : MonoBehaviour {
 
     void ParseResponse(string response)
     {
-        double value = GetJsonValue(response, "happiness");
-        Debug.Log("parsed value:" + value);
+        double happy = GetJsonValue(response, "happiness");
+		double sad = GetJsonValue(response, "sadness");
+		double angry = GetJsonValue(response, "anger");
+		double neutral = GetJsonValue(response, "neutral");
+		double surprised = GetJsonValue(response, "surprise");
+
+		GameManager gm = GameManager.instance;
+		gm.happy = happy;
+		gm.sad = sad;
+		gm.angry = angry;
+		gm.neutral = neutral;
+		gm.surprised = surprised;
     }
 
     //gets value for the first face for the given attribute
@@ -75,7 +85,15 @@ public class camera : MonoBehaviour {
             return 0;
         }
         string[] values = json.Split(new string[] { key + "\":" }, StringSplitOptions.None);
-        return Double.Parse(values[1].Split(',')[0]);
+		return Double.Parse((values[1].Split(',')[0]).Split('}')[0]);
 
     }
+
+	public void Disable()
+	{
+		if(webCamTex != null) 
+		{
+			webCamTex.Stop ();
+		}
+	}
 }

@@ -14,6 +14,12 @@ public class GameManager : MonoBehaviour {
 	public GameObject bg1Prefab;
 	public GameObject bg2Prefab;
 	public GameObject bg3Prefab;
+	// Sentiments
+	public double happy;
+	public double sad;
+	public double angry;
+	public double neutral;
+	public double surprised;
 
 	public Chunk chunkPrefab;
 
