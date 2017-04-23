@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour {
 	public double neutral;
 	public double surprised;
 
+	public bool isDead = false;
+
+	private float timeLeft;
 	public List<int> ends;
 
 	public Chunk chunkPrefab;
@@ -45,10 +48,13 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode) {
+		// Play music
+		UI.instance.musicScript.PlayLevelMusic();
 		// If scene is ingame, get player
 		if (scene.buildIndex == 1) {
 			player = GameObject.FindGameObjectWithTag ("Player");
 			env = GameObject.FindGameObjectWithTag ("Env");
+			isDead = false;
 			chunks = new List<GameObject> ();
 			int start_platform = Random.Range (0, 6);
 			player.transform.position = new Vector3 (1, 4 * start_platform + 2);
@@ -76,6 +82,10 @@ public class GameManager : MonoBehaviour {
 				instantiateBgChunk (bg2Prefab, bg2, coordX);
 				instantiateBgChunk (bg3Prefab, bg3, coordX);
 			}
+			// The start sound
+			UI.instance.musicScript.playStart();
+			// Time left to say something
+			timeLeft = Random.Range(2f, 8f);
 		}
 	}
 
@@ -87,8 +97,15 @@ public class GameManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (SceneManager.GetActiveScene ().buildIndex != 1) {
+		if (SceneManager.GetActiveScene ().buildIndex != 1 || isDead) {
 			return;
+		}
+		// Say something
+		timeLeft -= Time.deltaTime;
+		if ( timeLeft < 0 )
+		{
+			timeLeft = Random.Range (2f, 8f);
+			UI.instance.musicScript.playIngame ();
 		}
 		// Check if player is in second chunk
 		if (player.transform.position.x > 
