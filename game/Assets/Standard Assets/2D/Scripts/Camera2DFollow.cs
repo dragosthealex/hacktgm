@@ -45,18 +45,21 @@ namespace UnityStandardAssets._2D
             Vector3 newPos = Vector3.SmoothDamp(transform.position, aheadTargetPos, ref m_CurrentVelocity, damping);
 			if (newPos.y > 17) {
 				newPos.y = 17;
-			} else {
-				// bgs
-				Transform bg1 = bg.transform.GetChild (0);
-				Transform bg2 = bg.transform.GetChild (1);
-				Transform bg3 = bg.transform.GetChild (2);
-				bg1.transform.position = bg1.transform.position + moveDelta / 5;
-				bg2.transform.position = bg2.transform.position + moveDelta / 6;
-				bg3.transform.position = bg3.transform.position + moveDelta / 10;
+				moveDelta.y = 0;
 			}
-            transform.position = newPos;
 
+			// bgs
+			Transform bg1 = bg.transform.GetChild (0);
+			Transform bg2 = bg.transform.GetChild (1);
+			Transform bg3 = bg.transform.GetChild (2);
+			bg1.transform.position = bg1.transform.position + moveDelta / 5;
+			bg2.transform.position = bg2.transform.position + moveDelta / 6;
+			bg3.transform.position = bg3.transform.position + moveDelta / 10;
+            transform.position = newPos;
             m_LastTargetPosition = target.position;
+			// Move killzone
+			moveDelta.y = 0;
+			GameObject.FindGameObjectWithTag ("Killzone").transform.position += moveDelta;
         }
     }
 }
