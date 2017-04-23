@@ -68,8 +68,7 @@ public class GameManager : MonoBehaviour {
 			Transform bg1 = bg.transform.GetChild (0);
 			Transform bg2 = bg.transform.GetChild (1);
 			Transform bg3 = bg.transform.GetChild (2);
-			GameObject cur;
-			for (int i = 1; i < 3; i++) {
+				for (int i = 1; i < 3; i++) {
 				int coordX = i * 122 + 33;
 				instantiateBgChunk (bg1Prefab, bg1, coordX);
 				instantiateBgChunk (bg2Prefab, bg2, coordX);
