@@ -73,7 +73,7 @@ public class Chunk : MonoBehaviour {
 	}
 
 	// Generates chunk with starts
-	public void generate(List<int> starts) {
+	public List<int> generate(List<int> starts) {
 		double diflvl = 0.3;
 		int nrexits=0;
 
@@ -154,5 +154,7 @@ public class Chunk : MonoBehaviour {
 			}
 		}
 		*/
+
+		return ends;
 	}
 }

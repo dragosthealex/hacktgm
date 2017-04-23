@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour {
 	public double neutral;
 	public double surprised;
 
+	public List<int> ends;
+
 	public Chunk chunkPrefab;
 
 	void Awake () {
@@ -53,14 +55,14 @@ public class GameManager : MonoBehaviour {
 			// Generate first chunk
 			Chunk chunk = Instantiate(chunkPrefab);
 			chunk.transform.parent = env.transform;
-			chunk.generate (new List<int>(){start_platform});
+			ends = chunk.generate (new List<int>(){start_platform});
 			chunks.Add (chunk.gameObject);
 			// Generate rest of them up to 5
 			for (int i = 1; i < 5; i++) {
 				chunk = Instantiate (chunkPrefab);
 				chunk.transform.parent = env.transform;
 				chunk.transform.localPosition = new Vector3(Chunk.WIDTH * 2 * i, 0);
-				chunk.generate (new List<int> (){ start_platform });
+				ends = chunk.generate (ends);
 				chunks.Add (chunk.gameObject);
 			}
 			// Generate two bg chunks
@@ -102,7 +104,7 @@ public class GameManager : MonoBehaviour {
 			GameObject last = chunks [chunks.Count - 1];
 			chunk.transform.localPosition = new Vector3 (last.transform.position.x + Chunk.WIDTH * 2, 0);
 			// TODO: Use nice algorithm with blocks
-			chunk.generate (new List<int>(){5});
+			ends = chunk.generate (ends);
 			chunks.Add (chunk.gameObject);
 		}
 		// Do same stuff with bg
