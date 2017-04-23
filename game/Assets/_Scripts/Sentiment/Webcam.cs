@@ -5,9 +5,9 @@ using UnityEngine;
 using System;
 
 
-public class camera : MonoBehaviour {
+public class Webcam : MonoBehaviour {
 
-    WebCamTexture webCamTex;
+    public WebCamTexture webCamTex;
 
     byte[] image;
 
@@ -89,7 +89,8 @@ public class camera : MonoBehaviour {
 
     }
 
-	public void Disable()
+
+	public void OnDestroy()
 	{
 		if(webCamTex != null) 
 		{
