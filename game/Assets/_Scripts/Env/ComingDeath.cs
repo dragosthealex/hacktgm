@@ -14,6 +14,7 @@ public class ComingDeath : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.position += Vector3.right * Time.deltaTime * speed;
+		double dif = GameManager.instance.theDifficulty + 1.1;
+		transform.position += Vector3.right * Time.deltaTime * speed * (float)dif;
 	}
 }

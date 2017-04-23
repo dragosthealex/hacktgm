@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour {
 
 	public Chunk chunkPrefab;
 
+	public double theDifficulty;
+
 	void Awake () {
 		// Don't destroy stuff
 		if (GameManager.instance && GameManager.instance != this) {
@@ -68,7 +70,7 @@ public class GameManager : MonoBehaviour {
 				chunk = Instantiate (chunkPrefab);
 				chunk.transform.parent = env.transform;
 				chunk.transform.localPosition = new Vector3(Chunk.WIDTH * 2 * i, 0);
-				ends = chunk.generate (ends, 0.1f);
+				ends = chunk.generate (ends, -0.1f);
 				chunks.Add (chunk.gameObject);
 			}
 			// Generate two bg chunks
@@ -123,11 +125,6 @@ public class GameManager : MonoBehaviour {
 			// TODO: Use nice algorithm with blocks
 
 			double difficulty=0.0f;
-			difficulty = neutral - happy;
-//Debug.Log(difficulty);
-//Debug.Log("\n");
-//			Debug.Log(angry + " " + neutral + " " + happy );
-
 			if (angry > 0.2)
 				difficulty = angry;
 			else if (happy > 0.2)
@@ -135,15 +132,6 @@ public class GameManager : MonoBehaviour {
 			else
 				difficulty = (neutral - 0.95) * 8;
 
-/*
-			if (angry > 0.1 ){
-				if (happy > 0.1)
-					difficulty = (angry * neutral) / happy;
-				else 
-					difficulty = (neutral-0.9)*4;
-			}else
-				difficulty = (neutral-0.5) - happy;
-*/
 			if (difficulty < -0.1)
 				difficulty = -0.1; 
 
@@ -152,7 +140,7 @@ public class GameManager : MonoBehaviour {
 
 			Debug.Log(difficulty);	
 			Debug.Log("\n");		
-
+			theDifficulty = difficulty;
 			ends = chunk.generate (ends, difficulty);
 			chunks.Add (chunk.gameObject);
 		}
