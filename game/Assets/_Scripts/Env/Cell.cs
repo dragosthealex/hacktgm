@@ -14,6 +14,7 @@ public class Cell : MonoBehaviour {
 	public GameObject content;
 
 	public GameObject platformPrefab;
+	public GameObject spikesPlatform;
 
 	public void Awake() {
 		type = "empty";
@@ -26,6 +27,7 @@ public class Cell : MonoBehaviour {
 	}
 
 	public void drawType() {
+		GameObject platform;
 		switch (type) {
 		case("empty"):
 			// pass
@@ -35,7 +37,14 @@ public class Cell : MonoBehaviour {
 			break;
 		case("platform"):
 			// Draw platform
-			GameObject platform = Instantiate (platformPrefab);
+			platform = Instantiate (platformPrefab);
+			platform.transform.parent = gameObject.transform;
+			platform.transform.localPosition = Vector3.zero;
+			content = platform;
+			break;
+		case("spikes"):
+			// Draw platform
+			platform = Instantiate (spikesPlatform);
 			platform.transform.parent = gameObject.transform;
 			platform.transform.localPosition = Vector3.zero;
 			content = platform;

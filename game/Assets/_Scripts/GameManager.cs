@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour {
 			player = GameObject.FindGameObjectWithTag ("Player");
 			env = GameObject.FindGameObjectWithTag ("Env");
 			chunks = new List<GameObject> ();
-			int start_platform = Random.Range (0, 5);
+			int start_platform = Random.Range (0, 6);
 			player.transform.position = new Vector3 (1, 4 * start_platform + 2);
 			// Generate first chunk
 			Chunk chunk = Instantiate(chunkPrefab);
