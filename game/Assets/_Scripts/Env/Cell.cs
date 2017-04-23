@@ -6,9 +6,9 @@ using UnityEngine;
 public class Cell : MonoBehaviour {
 
 	public static List<string> types = new List<string>(){"platform", 
-		                                                  "empty",
-														  "spikes",
-	                                                      "fallPlatform"};
+		"empty",
+		"spikes",
+		"fallPlatform"};
 
 	public string type;
 	public GameObject content;
