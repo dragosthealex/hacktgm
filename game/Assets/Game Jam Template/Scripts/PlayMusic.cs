@@ -7,22 +7,47 @@ public class PlayMusic : MonoBehaviour {
 
 
 	public AudioClip titleMusic;					//Assign Audioclip for title music loop
-	public AudioClip mainMusic;						//Assign Audioclip for main 
+	public AudioClip mainMusic;						//Assign Audioclip for main
+	public AudioClip[] startSpeech;
+	public AudioClip[] deathSpeech;
+	public AudioClip[] playingSpeech;
 	public AudioMixerSnapshot volumeDown;			//Reference to Audio mixer snapshot in which the master volume of main mixer is turned down
 	public AudioMixerSnapshot volumeUp;				//Reference to Audio mixer snapshot in which the master volume of main mixer is turned up
 
 
 	private AudioSource musicSource;				//Reference to the AudioSource which plays music
+	private AudioSource effectsSource;
 	private float resetTime = .01f;					//Very short time used to fade in near instantly without a click
 
 
 	void Awake () 
 	{
 		//Get a component reference to the AudioSource attached to the UI game object
-		musicSource = GetComponent<AudioSource> ();
+		musicSource = GetComponents<AudioSource> ()[0];
+		effectsSource = GetComponents<AudioSource> ()[1];
 		//Call the PlayLevelMusic function to start playing music
 	}
 
+
+	public void playStart() {
+		int rnd = Random.Range (0, startSpeech.Length);
+		effectsSource.clip = startSpeech [rnd];
+		effectsSource.Play ();
+	}
+
+	public float playDeath() {
+		int rnd = Random.Range (0, deathSpeech.Length);
+		AudioClip snd = deathSpeech [rnd];
+		effectsSource.clip = snd;
+		effectsSource.Play ();
+		return snd.length;
+	}
+
+	public void playIngame() {
+		int rnd = Random.Range (0, playingSpeech.Length);
+		effectsSource.clip = playingSpeech [rnd];
+		effectsSource.Play ();
+	}
 
 	public void PlayLevelMusic()
 	{
