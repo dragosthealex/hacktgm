@@ -34,6 +34,7 @@ public class Cell : MonoBehaviour {
 			GameObject platform = Instantiate (platformPrefab);
 			platform.transform.parent = gameObject.transform;
 			platform.transform.localPosition = Vector3.zero;
+			content = platform;
 			break;
 		default:
 			break;
